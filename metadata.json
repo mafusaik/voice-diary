@@ -1,0 +1,6 @@
+{
+  "name": "Voice Diary Landing Page",
+  "description": "A clean, modern, and fully responsive GitHub landing page for Voice Diary, featuring an interactive smartphone preview simulator, Play Store redirect, and actual Terms and Privacy policies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
