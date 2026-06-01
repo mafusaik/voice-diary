@@ -19,7 +19,9 @@ import {
   Settings,
   X,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  CreditCard,
+  ChevronDown
 } from "lucide-react";
 import { TranslationSchema } from "../data/translations";
 
@@ -31,13 +33,18 @@ interface ScreenshotsShowcaseProps {
 
 export default function InteractiveMockup({ currentLanguage, translations, isDarkTheme }: ScreenshotsShowcaseProps) {
   const t = translations[currentLanguage] || translations["en-US"];
-  // activeTab maps directly to the user's 5 screenshots:
+  // activeTab maps directly to the user's 6 screenshots/tabs:
   // 0: Index (Light) -> Screenshot 2
   // 1: Index (Dark) -> Screenshot 1
   // 2: Note Editor (Light Detail) -> Screenshot 3
   // 3: Voice Recorder (Active Rec) -> Screenshot 4
   // 4: Statistics (Metrics Calendar) -> Screenshot 5
+  // 5: Settings -> Screenshot 6
   const [activeTab, setActiveTab] = useState<number>(0);
+  const [mockDarkMode, setMockDarkMode] = useState<boolean>(false);
+  const [isMockLanguageOpen, setIsMockLanguageOpen] = useState<boolean>(false);
+  const [mockLanguage, setMockLanguage] = useState<string>("English 🇺🇸");
+  const [isRestored, setIsRestored] = useState<boolean>(false);
 
   // Define screen tabs with names
   const screenTabs = [
@@ -46,6 +53,7 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
     { id: 2, label: "Note Editor", icon: FileText },
     { id: 3, label: "Voice Recorder", icon: Mic },
     { id: 4, label: "Statistics", icon: BarChart3 },
+    { id: 5, label: "Settings", icon: Settings },
   ];
 
   // Notes lists compiled strictly from user screenshots
@@ -63,22 +71,23 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
   ];
 
   const getDarkNotes = () => [
-    { title: "Team Meeting", time: "2026-04-02 12:00", fav: false },
-    { title: "Project Idea", time: "2026-04-03 12:00", fav: false },
-    { title: "Shopping List", time: "2026-04-04 12:00", fav: true },
-    { title: "Books to Read", time: "2026-04-05 12:00", fav: false },
-    { title: "Workout", time: "2026-04-06 12:00", fav: true },
-    { title: "Pasta Recipe", time: "2026-04-10 12:00", fav: false },
-    { title: "Vacation Plans", time: "2026-04-11 12:00", fav: true },
-    { title: "Goals for 2026", time: "2026-04-12 12:00", fav: true },
-    { title: "Lecture Notes", time: "2026-05-10 12:00", fav: true },
-    { title: "Thoughts Before Sleep", time: "2026-05-11 12:00", fav: true },
     { title: "Bug in the App", time: "2026-05-12 12:00", fav: true },
+    { title: "Thoughts Before Sleep", time: "2026-05-11 12:00", fav: true },
+    { title: "Lecture Notes", time: "2026-05-10 12:00", fav: true },
+    { title: "Goals for 2026", time: "2026-04-12 12:00", fav: true },
+    { title: "Vacation Plans", time: "2026-04-11 12:00", fav: true },
+    { title: "Pasta Recipe", time: "2026-04-10 12:00", fav: false },
+    { title: "Workout", time: "2026-04-06 12:00", fav: true },
+    { title: "Books to Read", time: "2026-04-05 12:00", fav: false },
+    { title: "Shopping List", time: "2026-04-04 12:00", fav: true },
+    { title: "Project Idea", time: "2026-04-03 12:00", fav: false },
+    { title: "Team Meeting", time: "2026-04-02 12:00", fav: false },
   ];
 
   // Specific color constants mimicking Android layouts
   const lightBgStyle = "linear-gradient(180deg, #E5EEF9 0%, #D8E2F2 40%, #CFDAEB 100%)";
   const darkBgStyle = "linear-gradient(180deg, #1A2535 0%, #171F2C 50%, #121822 100%)";
+  const isMockDarkActive = activeTab === 1 || (activeTab === 5 && mockDarkMode);
 
   return (
     <div id="screenshots-showcase" className="flex flex-col items-center gap-6 w-full max-w-lg">
@@ -117,14 +126,14 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
         <div 
           className="w-full h-full pt-6 pb-2.5 flex flex-col font-sans transition-all duration-300 relative text-slate-800"
           style={{
-            background: activeTab === 1 ? darkBgStyle : lightBgStyle,
-            color: activeTab === 1 ? "#F1F5F9" : "#1E293B"
+            background: isMockDarkActive ? darkBgStyle : lightBgStyle,
+            color: isMockDarkActive ? "#F1F5F9" : "#1E293B"
           }}
         >
           {/* Status Bar */}
           <div className="px-5 py-1 flex justify-between items-center text-[10px] font-bold opacity-80 z-20">
             <span>
-              {activeTab === 0 ? "9:46" : activeTab === 1 ? "9:52" : activeTab === 2 ? "9:52" : activeTab === 3 ? "9:57" : "9:52"}
+              {activeTab === 0 ? "9:46" : activeTab === 1 ? "9:52" : activeTab === 2 ? "9:52" : activeTab === 3 ? "9:57" : activeTab === 5 ? "8:36" : "9:52"}
             </span>
             <div className="flex items-center gap-1.5">
               <Signal className="w-2.5 h-2.5" />
@@ -202,19 +211,40 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
                   initial={{ opacity: 0, y: 5 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   exit={{ opacity: 0 }}
-                  className="space-y-3 pb-2 relative"
+                  className="space-y-3.5"
                 >
-                  {/* Floating Magnifier Search Icon Circle on the right */}
-                  <div className="absolute top-[35px] right-[5px] w-9 h-9 rounded-full bg-[#203D57]/90 flex items-center justify-center border border-[#3E5C79]/30 shadow-md cursor-pointer z-20">
-                    <Search className="w-4.5 h-4.5 text-[#5FCEFF]" />
+                  {/* Search input mock (dark mode) */}
+                  <div className="bg-[#212E3F]/90 border border-[#2D3E53]/40 rounded-[18px] px-3.5 py-2.5 flex items-center justify-between text-[#F1F5F9] shadow-3xs">
+                    <div className="flex items-center gap-2">
+                      <Search className="w-4 h-4 text-[#7E96AE]" />
+                      <span className="text-[#7E96AE] text-[11px] font-medium">Search notes...</span>
+                    </div>
+                    <X className="w-4 h-4 text-[#7E96AE] cursor-pointer" />
+                  </div>
+
+                  {/* Horizontal row of tag chips (dark mode) */}
+                  <div className="flex items-center gap-1.5 overflow-x-auto py-0.5 scrollbar-none text-[8.5px]">
+                    <span className="px-2.5 py-1.5 bg-[#212E3F]/40 text-[#7E96AE] border border-slate-700/30 rounded-lg flex items-center gap-1 shrink-0 font-bold shadow-3xs">
+                      <Heart className="w-3 h-3 text-[#5D738E]" />
+                      Favorites
+                    </span>
+                    <span className="px-3 py-1.5 bg-[#253E56] text-[#5FCEFF] border border-[#305373] rounded-lg shrink-0 font-extrabold flex items-center gap-0.5 shadow-3xs">
+                      ↓ Newest
+                    </span>
+                    <span className="px-2.5 py-1.5 bg-[#212E3F]/40 text-[#7E96AE] border border-slate-700/30 rounded-lg shrink-0 font-bold shadow-3xs">
+                      ↑ Oldest
+                    </span>
+                    <span className="px-2.5 py-1.5 bg-[#212E3F]/40 text-[#7E96AE] border border-slate-700/30 rounded-lg shrink-0 font-bold shadow-3xs">
+                      Title A-Z
+                    </span>
                   </div>
 
                   {/* Dark-themed exact list of notes */}
-                  <div className="space-y-2.5 pt-1">
+                  <div className="space-y-2.5 pb-2">
                     {getDarkNotes().map((note, index) => (
                       <div 
                         key={index}
-                        className="bg-[#212E3F]/90 border border-[#2D3E53]/40 rounded-2xl p-3.5 flex justify-between items-center shadow-sm cursor-pointer"
+                        className="bg-[#212E3F]/90 border border-[#2D3E53]/40 rounded-2xl p-3.5 flex justify-between items-center shadow-sm hover:opacity-95 transition-opacity cursor-pointer"
                         onClick={() => setActiveTab(2)}
                       >
                         <div className="space-y-1">
@@ -407,6 +437,151 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
                 </motion.div>
               )}
 
+              {/* SCREEN 5: SETTINGS (Screenshot 6 - New Settings View) */}
+              {activeTab === 5 && (
+                <motion.div 
+                  key="settings-screen" 
+                  initial={{ opacity: 0, y: 5 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  exit={{ opacity: 0 }}
+                  className="space-y-4 pt-1 pb-1 relative"
+                >
+                  <h3 className={`text-base font-extrabold text-center tracking-tight pb-1 ${
+                    isMockDarkActive ? "text-white" : "text-[#21354F]"
+                  }`}>
+                    Settings
+                  </h3>
+
+                  {/* Appearance section */}
+                  <div>
+                    <span className="text-[10px] font-bold text-[#5F738A] uppercase tracking-wider block mb-2">
+                      Appearance
+                    </span>
+                    <div className="flex justify-between items-center py-1">
+                      <span className={`text-[12.5px] font-bold ${isMockDarkActive ? "text-slate-200" : "text-[#21354F]"}`}>
+                        Dark Mode
+                      </span>
+                      {/* Interactive Custom Switch */}
+                      <button 
+                        onClick={() => setMockDarkMode(!mockDarkMode)}
+                        className={`w-11 h-6 rounded-full transition-colors relative shadow-3xs cursor-pointer ${
+                          mockDarkMode ? "bg-sky-500" : "bg-[#BCCCE1]"
+                        }`}
+                      >
+                        <motion.span 
+                          layout
+                          className="w-4.5 h-4.5 bg-white rounded-full absolute top-[3.5px]"
+                          animate={{ left: mockDarkMode ? "22px" : "3.5px" }}
+                          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Language section */}
+                  <div className="relative">
+                    <span className="text-[10px] font-bold text-[#5F738A] uppercase tracking-wider block mb-2">
+                      Language
+                    </span>
+                    
+                    {/* Dropdown Input Box */}
+                    <div 
+                      onClick={() => setIsMockLanguageOpen(!isMockLanguageOpen)}
+                      className={`rounded-[16px] px-3.5 py-2.5 flex items-center justify-between shadow-3xs cursor-pointer border transition-all ${
+                        isMockDarkActive 
+                          ? "bg-[#212E3F]/90 border-[#2D3E53]/40 text-white hover:bg-[#212E3F]/100" 
+                          : "bg-white border-[#CBD9EE]/50 text-[#21354F] hover:bg-white/90"
+                      }`}
+                    >
+                      <span className="text-[11.5px] font-bold">{mockLanguage}</span>
+                      <ChevronDown className={`w-4 h-4 text-[#5F738A] transition-transform duration-200 ${isMockLanguageOpen ? "rotate-180" : ""}`} />
+                    </div>
+
+                    {/* Popover Language List Overlay */}
+                    <AnimatePresence>
+                      {isMockLanguageOpen && (
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.95, y: -5 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.95, y: -5 }}
+                          className={`absolute z-30 left-0 right-0 mt-1 rounded-[14px] border shadow-lg overflow-hidden py-1 ${
+                            isMockDarkActive 
+                              ? "bg-[#1E2938] border-slate-700/60 text-slate-200" 
+                              : "bg-white border-slate-200/80 text-slate-800"
+                          }`}
+                        >
+                          {[
+                            { name: "English 🇺🇸", code: "en-US" },
+                            { name: "German 🇩🇪", code: "de-DE" },
+                            { name: "French 🇫🇷", code: "fr-FR" },
+                            { name: "Japanese 🇯🇵", code: "ja-JP" },
+                            { name: "Spanish 🇪🇸", code: "es-ES" }
+                          ].map((lang) => (
+                            <button
+                              key={lang.code}
+                              onClick={() => {
+                                setMockLanguage(lang.name);
+                                setIsMockLanguageOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-2 text-[11px] font-bold transition-colors ${
+                                mockLanguage === lang.name 
+                                  ? "bg-sky-500/10 text-sky-500" 
+                                  : isMockDarkActive ? "hover:bg-slate-800" : "hover:bg-slate-50"
+                              }`}
+                            >
+                              {lang.name}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+
+                  {/* Subscription section */}
+                  <div>
+                    <span className="text-[10px] font-bold text-[#5F738A] uppercase tracking-wider block mb-2">
+                      Subscription
+                    </span>
+                    <div className="flex items-center gap-2.5 py-1">
+                      <CreditCard className="w-5 h-5 text-[#5F738A] shrink-0" />
+                      <span className={`text-[12.5px] font-bold ${isMockDarkActive ? "text-slate-200" : "text-[#21354F]"}`}>
+                        No active subscription
+                      </span>
+                    </div>
+                    
+                    {/* Restore purchases button */}
+                    <button 
+                      onClick={() => {
+                        setIsRestored(true);
+                        setTimeout(() => setIsRestored(false), 2000);
+                      }}
+                      className={`w-full font-extrabold py-3 px-4 rounded-[20px] text-[11px] tracking-tight shadow-3xs transition-all cursor-pointer text-center mt-3 ${
+                        isRestored 
+                          ? "bg-emerald-500 text-white border-none"
+                          : isMockDarkActive 
+                            ? "bg-[#253E56] hover:bg-[#203449] text-[#5FCEFF] border border-[#305373]/30" 
+                            : "bg-[#CBD9EE]/85 hover:bg-[#BACDE6]/90 text-[#213F6D] border border-white/50"
+                      }`}
+                    >
+                      {isRestored ? "✓ Purchases restored" : "Restore purchases"}
+                    </button>
+                  </div>
+
+                  {/* Support Section */}
+                  <div className="pt-1">
+                    <span className="text-[10px] font-bold text-[#5F738A] uppercase tracking-wider block mb-1">
+                      Support
+                    </span>
+                    <div className="text-[12px] font-bold">
+                      <span className="text-slate-500">Support Email: </span>
+                      <a href="mailto:glazer.dev@gmail.com" className="text-[#20497F] dark:text-sky-400 hover:underline">
+                        glazer.dev@gmail.com
+                      </a>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+
             </AnimatePresence>
           </div>
 
@@ -414,9 +589,9 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
           <div className="absolute bottom-2.5 inset-x-0 z-20">
             <div 
               className={`w-[85%] mx-auto rounded-[24px] flex items-center justify-between px-3.5 py-2.5 border backdrop-blur-md transition-all duration-300 shadow-lg ${
-                activeTab === 1 
-                  ? "bg-[#1C2A3C]/90 border-slate-700/50 text-[#8EA0B6]" 
-                  : "bg-white/60 border-white/50 text-[#5F738A]"
+                isMockDarkActive 
+                  ? "bg-[#1C2A3C]/95 border-slate-700/50 text-[#8EA0B6]" 
+                  : "bg-white/70 border-white/60 text-[#5F738A]"
               }`}
             >
               {/* Mic navigation trigger */}
@@ -424,9 +599,10 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
                 onClick={() => setActiveTab(3)} 
                 className={`p-1.5 rounded-xl transition-all relative cursor-pointer ${
                   activeTab === 3 
-                    ? (activeTab === 1 ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] font-bold text-[#1A73E8] border border-white") 
+                    ? (isMockDarkActive ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] font-bold text-[#1A73E8] border border-white") 
                     : "hover:opacity-80"
                 }`}
+                title="Voice Recorder"
               >
                 <Mic className="w-[18px] h-[18px]" />
               </button>
@@ -439,14 +615,15 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
                     // switch to opposite index just for cool play toggle
                     setActiveTab(activeTab === 0 ? 1 : 0);
                   } else {
-                    setActiveTab(isDarkTheme ? 1 : 0);
+                    setActiveTab(isMockDarkActive ? 1 : 0);
                   }
                 }} 
                 className={`p-1.5 rounded-xl transition-all relative cursor-pointer ${
                   _isNotesIndexTabActive(activeTab)
-                    ? (activeTab === 1 ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] text-[#1A73E8] border border-white") 
+                    ? (isMockDarkActive ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] text-[#1A73E8] border border-white") 
                     : "hover:opacity-80"
                 }`}
+                title="Notes List"
               >
                 <FileText className="w-[18px] h-[18px]" />
               </button>
@@ -456,21 +633,23 @@ export default function InteractiveMockup({ currentLanguage, translations, isDar
                 onClick={() => setActiveTab(4)} 
                 className={`p-1.5 rounded-xl transition-all relative cursor-pointer ${
                   activeTab === 4 
-                    ? (activeTab === 1 ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] text-[#1A73E8] border border-white") 
+                    ? (isMockDarkActive ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] text-[#1A73E8] border border-white") 
                     : "hover:opacity-80"
                 }`}
+                title="Statistics"
               >
                 <BarChart3 className="w-[18px] h-[18px]" />
               </button>
 
-              {/* Settings gear anchor mockup trigger */}
+              {/* Settings navigation trigger */}
               <button 
-                onClick={() => {
-                  // just toggles theme directly on the mockup screen to match!
-                  setActiveTab(activeTab === 1 ? 0 : 1);
-                }} 
-                className="p-1.5 hover:opacity-80 rounded-xl cursor-pointer"
-                title="Toggle mockup theme"
+                onClick={() => setActiveTab(5)} 
+                className={`p-1.5 rounded-xl transition-all relative cursor-pointer ${
+                  activeTab === 5 
+                    ? (isMockDarkActive ? "bg-slate-700/40 text-[#5FCEFF] border border-slate-600/30" : "bg-[#D5E3F9] text-[#1A73E8] border border-white") 
+                    : "hover:opacity-80"
+                }`}
+                title="Settings"
               >
                 <Settings className="w-[18px] h-[18px]" />
               </button>

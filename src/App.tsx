@@ -24,7 +24,7 @@ import { translations } from "./data/translations";
 
 // Import the generated app logo asset so Vite lists and compiles it correctly in production
 // @ts-ignore
-import appLogo from "./assets/images/app_logo_1780227292474.png";
+import appLogo from "./assets/images/app_logo_1780295242431.png";
 
 const LANGUAGES = [
   { code: "en-US", name: "English", flag: "🇺🇸" },
@@ -54,6 +54,17 @@ export default function App() {
 
   // Check URL routes for query params or hashes to serve Support instantly via URL request
   useEffect(() => {
+    // Dynamic tab favicon injection so that it resolves perfectly in GitHub subdirectories and localhost
+    let link = document.getElementById("dynamic-favicon") as HTMLLinkElement;
+    if (!link) {
+      link = document.createElement("link");
+      link.id = "dynamic-favicon";
+      link.rel = "icon";
+      link.type = "image/png";
+      document.head.appendChild(link);
+    }
+    link.href = appLogo;
+
     const handleNavigation = () => {
       const params = new URLSearchParams(window.location.search);
       const hash = window.location.hash;
