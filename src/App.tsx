@@ -197,7 +197,7 @@ export default function App() {
               </div>
               <div className="flex flex-col">
                 <span className="font-extrabold text-sm sm:text-base tracking-tight select-none">Voice Diary</span>
-                <span className="text-[9px] block text-indigo-500 font-extrabold uppercase tracking-widest leading-none">Glazer Audio</span>
+                <span className="text-[9px] block text-indigo-500 font-extrabold uppercase tracking-widest leading-none">GlazerDev</span>
               </div>
             </div>
 
