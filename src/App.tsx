@@ -22,8 +22,9 @@ import InteractiveMockup from "./components/InteractiveMockup";
 import LegalModal from "./components/LegalModal";
 import { translations } from "./data/translations";
 
-// Path to the generated app logo asset
-const appLogo = "/src/assets/images/app_logo_1780227292474.png";
+// Import the generated app logo asset so Vite lists and compiles it correctly in production
+// @ts-ignore
+import appLogo from "./assets/images/app_logo_1780227292474.png";
 
 const LANGUAGES = [
   { code: "en-US", name: "English", flag: "🇺🇸" },
