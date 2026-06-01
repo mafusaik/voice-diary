@@ -332,13 +332,15 @@ export default function App() {
                   // Unset support hash on click
                   window.location.hash = "";
                 }}
-                className="
-                inline-flex items-center gap-2
-                text-blue-600
-                hover:text-blue-700
+               className="
+                px-4 py-2
+                rounded-xl
+                bg-slate-100 dark:bg-slate-800
+                text-black dark:text-white
                 font-medium
-                cursor-pointer">
-                ← Back to Home
+                flex items-center gap-2">
+                <span>←</span>
+                <span>Back to Home</span>
               </button>
 
               <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-sky-400 via-indigo-500 to-indigo-600 p-0.5 shadow-xl flex items-center justify-center">
