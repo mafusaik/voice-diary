@@ -198,7 +198,7 @@ export default function LegalModal({ isOpen, onClose, defaultTab }: LegalModalPr
             {/* Footer of modal */}
             <div className="px-6 py-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 text-center text-[11px] text-slate-400 dark:text-slate-500 font-medium">
               <span>This agreement is formulated to align in full compliance with GDPR and CCPA policies. For custom developer inquiries, reach out at </span>
-              <a href="mailto:mafusaik@gmail.com" className="text-sky-500 hover:underline font-bold">mafusaik@gmail.com</a>
+              <a href="mailto:glazer.dev@gmail.com" className="text-sky-500 hover:underline font-bold">glazer.dev@gmail.com</a>
             </div>
 
           </motion.div>

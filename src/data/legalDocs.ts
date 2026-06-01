@@ -20,7 +20,7 @@ export const privacyPolicy: LegalDoc = {
       content: [
         "Audio Recordings & Transcripts: To transcribe/refine your voice journals, our application securely processes your spoken audio recording to generate structured text. Both the audio recordings and generated text are stored and processed. No voice recordings or text entries are sold or rented.",
         "Subscription and Purchase Metadata: We track your free trial (7 days) and subscription status to deliver access features.",
-        "Feedback & Support Information: If you reach out to us at mafusaik@gmail.com, we collect your email address and any communications details you choose to share to solve support queries."
+        "Feedback & Support Information: If you reach out to us at glazer.dev@gmail.com, we collect your email address and any communications details you choose to share to solve support queries."
       ]
     },
     {
@@ -45,7 +45,7 @@ export const privacyPolicy: LegalDoc = {
     },
     {
       heading: "7. Contact and Support Email",
-      content: "For queries, deletion procedures, or standard privacy requests, please feel free to send a message to mafusaik@gmail.com."
+      content: "For queries, deletion procedures, or standard privacy requests, please feel free to send a message to glazer.dev@gmail.com."
     }
   ]
 };
@@ -84,7 +84,7 @@ export const termsOfService: LegalDoc = {
     },
     {
       heading: "7. Help and Support",
-      content: "If you have questions about subscription cancellations, billing, translation fixes, or terms compliance, please contact us at mafusaik@gmail.com."
+      content: "If you have questions about subscription cancellations, billing, translation fixes, or terms compliance, please contact us at glazer.dev@gmail.com."
     }
   ]
 };
