@@ -9,82 +9,110 @@ export interface LegalDoc {
 
 export const privacyPolicy: LegalDoc = {
   title: "Privacy Policy",
-  lastUpdated: "May 31, 2026",
+  lastUpdated: "April 29, 2025",
   sections: [
     {
-      heading: "1. Introduction",
-      content: "Thank you for choosing Voice Diary ('the App', 'us', 'we', 'our'). We are committed to protecting your personal data and your privacy. This Privacy Policy outlines what information we collect, how we process it, and your rights concerning your personal recordings and transcripts. By installing and using Voice Diary, you consent to our collection, processing, and storage practices as detailed in this policy."
+      heading: "1. Information We Collect",
+      content: "The app requests access to the microphone solely for speech recognition purposes. Audio is processed locally via the Google Speech Recognizer and is never stored by the app. Recognized text is saved to a local database on the user's device."
     },
     {
-      heading: "2. Information We Process & Collect",
+      heading: "2. Third-Party Services",
       content: [
-        "Audio Recordings & Transcripts: To transcribe/refine your voice journals, our application securely processes your spoken audio recording to generate structured text. Both the audio recordings and generated text are stored and processed. No voice recordings or text entries are sold or rented.",
-        "Subscription and Purchase Metadata: We track your free trial (7 days) and subscription status to deliver access features.",
-        "Feedback & Support Information: If you reach out to us at glazer.dev@gmail.com, we collect your email address and any communications details you choose to share to solve support queries."
+        "Transcription: Voice recordings are sent to Deepgram (deepgram.com) for transcription. This occurs only after the user provides explicit consent in the app. Audio is not retained by Deepgram beyond the duration of processing. See Deepgram's privacy policy: deepgram.com/privacy",
+        "AI text improvement: If the user chooses to improve recognized text using AI, that text is sent to Groq AI (groq.com). This happens only upon explicit user action and is entirely optional. See Groq's privacy policy: groq.com/privacy",
+        "We do not sell or share user data with any third parties for any other purpose."
       ]
     },
     {
-      heading: "3. How Your Voice Data is Used",
-      content: [
-        "We use secure AI systems to transcribe, structure, and refine your spoken thoughts into journal entries.",
-        "Your spoken journals are exclusively leveraged to deliver the app's services, preserve personal tone, draft notes, and summarize structures.",
-        "Your data is never sold, shared with advertisers, or used for profiling, and we never display advertisements inside the app."
-      ]
+      heading: "3. Data Storage",
+      content: "All data is stored locally on the user's device. We have no access to this data and do not store it on any servers."
     },
     {
-      heading: "4. Third-Party Core Processing",
-      content: "For rendering AI transcription models and language structures, your recordings are safely routed through secure AI processing tunnels. Third-party infrastructure partners act as confidential subprocessors and are legally bound by strict confidentiality and safety protocols — they are prohibited from using your data for any promotional or advertising tasks."
+      heading: "4. Data Deletion",
+      content: "Users can delete all data by uninstalling the app. The local database is removed along with the app."
     },
     {
-      heading: "5. Information Security & Encryption",
-      content: "We implement advanced industry-standard data encryption both during transit and at rest to defend against unauthorized file breaches, alteration, or leaks. However, no database or transmission channel can be guaranteed 100% secure. We strongly coordinate to provide optimal hardware guardrails for your voice journals."
+      heading: "5. Children's Rights",
+      content: "The app is not intended for children under 13 years of age and does not collect data from children."
     },
     {
-      heading: "6. User Control & Data Deletion",
-      content: "You retain full control over your journal notes, audios, and files. You can delete individual transcript records or your entire diary database inside the Voice Diary application at any time, which permanently fires off deletion of historical logs associated with your metadata."
+      heading: "6. Contact",
+      content: "If you have any questions about this Privacy Policy, please contact us at: glazer.dev@gmail.com"
     },
     {
-      heading: "7. Contact and Support Email",
-      content: "For queries, deletion procedures, or standard privacy requests, please feel free to send a message to glazer.dev@gmail.com."
+      heading: "7. In-App Purchases",
+      content: "We use RevenueCat to process in-app subscriptions. RevenueCat may collect purchase history and device identifiers to manage subscription status. See RevenueCat's privacy policy: https://www.revenuecat.com/privacy"
     }
   ]
 };
 
 export const termsOfService: LegalDoc = {
   title: "Terms of Service",
-  lastUpdated: "May 31, 2026",
+  lastUpdated: "April 29, 2025",
   sections: [
     {
-      heading: "1. Agreement to Terms",
-      content: "By installing, testing, or subscribing to the Voice Diary application, you represent that you have read, understood, and agreed to be bound by these Terms of Service. If you do not accept these Terms, do not install or use the app."
+      heading: "1. Acceptance of Terms",
+      content: "By downloading or using the Voice Diary application (\"App\"), you agree to be bound by these Terms of Service. If you do not agree, please do not use the App."
     },
     {
-      heading: "2. Free Trial & Subscriptions",
+      heading: "2. Description of Service",
+      content: "The App allows users to record voice input, convert speech to text, and store notes locally on their device. Optional AI-based text improvement may be provided via third-party services."
+    },
+    {
+      heading: "3. User Responsibilities",
       content: [
-        "Free Trial: Voice Diary offers full access free for 7 days. You may cancel at any point during this period without incurring fees.",
-        "Subscriptions: After the 7-day trial, you can continue accessing unlimited journals, transcriber credits, and advanced summaries via a monthly or annual subscription billed directly through your Google Play Store account.",
-        "Daily limits for free tier: Non-subscribed users are limited to 4 minutes of recording time per day."
+        "You agree to use the App only for lawful purposes. You are solely responsible for the content you create, store, or process using the App.",
+        "You must not misuse the App, attempt to reverse engineer it, or use it for illegal or harmful activities."
       ]
     },
     {
-      heading: "3. Acceptable Use Policy",
-      content: "You are solely responsible for all content you record on Voice Diary. You agree not to upload, transmit, or process voice recordings containing spyware, malware, or content violating copyright laws, or recordings representing illegal actions."
+      heading: "4. Payments and Subscriptions",
+      content: [
+        "The App may offer paid features, including subscriptions and one-time purchases.",
+        "All payments are processed through the respective platform (Apple App Store or Google Play). Payment will be charged to your Apple ID or Google account at the confirmation of purchase.",
+        "Subscriptions automatically renew unless canceled at least 24 hours before the end of the current billing period. You can manage or cancel your subscription in your platform's subscription settings (App Store: Settings → Apple ID → Subscriptions; Google Play: Play Store → Subscriptions).",
+        "Refunds are handled according to the policy of the respective platform provider. We do not collect or store payment information.",
+        "By using the App, you agree to Apple's Standard End User License Agreement (EULA): https://www.apple.com/legal/internet-services/itunes/dev/stdeula/"
+      ]
     },
     {
-      heading: "4. Intellectual Property Rights",
-      content: "All source files, software engines, visual card layouts, designs, trademarks, and logos associated with the 'Voice Diary' product are the absolute intellectual property of Glazier Audio Journal and our licensors. Your audio files and text transcripts belong entirely to you and we assert no proprietary claim over your diary content."
+      heading: "5. Third-Party Services",
+      content: [
+        "The App may use third-party services for certain features. By using those features, you agree to the terms of those third-party providers.",
+        "We are not responsible for the content, accuracy, or data practices of third-party services."
+      ]
     },
     {
-      heading: "5. Disclaimers of Warranties",
-      content: "The Voice Diary application is provided on an 'AS IS' and 'AS AVAILABLE' basis without warranty of any kind. Glazier Audio Journal disclaims all representations, including but not limited to, the accuracy of speech-to-text translations or continuous uninterrupted system availability."
+      heading: "6. Data and Privacy",
+      content: "Your data is stored locally on your device. Please refer to the Privacy Policy for more information."
     },
     {
-      heading: "6. Limitation of Liability",
-      content: "In no event shall we or our partners be liable for any incidental, direct, indirect, special, punitive, or consequential damages resulting from your use of Voice Diary or errors in transcribing your speech logs, even if we were informed beforehand."
+      heading: "7. Intellectual Property",
+      content: "The App and its original content, features, and functionality are the property of the developer and are protected by applicable laws."
     },
     {
-      heading: "7. Help and Support",
-      content: "If you have questions about subscription cancellations, billing, translation fixes, or terms compliance, please contact us at glazer.dev@gmail.com."
+      heading: "8. No Warranty",
+      content: "The App is provided \"as is\" without warranties of any kind. We do not guarantee that the App will be error-free or uninterrupted."
+    },
+    {
+      heading: "9. Limitation of Liability",
+      content: "To the maximum extent permitted by law, we are not liable for any damages arising from the use or inability to use the App."
+    },
+    {
+      heading: "10. Termination",
+      content: "We reserve the right to suspend or terminate access to the App at any time without notice."
+    },
+    {
+      heading: "11. Changes to Terms",
+      content: "We may update these Terms from time to time. Continued use of the App means you accept the updated Terms."
+    },
+    {
+      heading: "12. Governing Law",
+      content: "These Terms shall be governed by and interpreted in accordance with the laws of your country of residence."
+    },
+    {
+      heading: "13. Contact",
+      content: "If you have any questions, please contact: glazer.dev@gmail.com"
     }
   ]
 };
