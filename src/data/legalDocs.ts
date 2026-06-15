@@ -13,14 +13,19 @@ export const privacyPolicy: LegalDoc = {
   sections: [
     {
       heading: "1. Information We Collect",
-      content: "The app requests access to the microphone solely for speech recognition purposes. Audio is processed locally via the Google Speech Recognizer and is never stored by the app. Recognized text is saved to a local database on the user's device."
+      content: [
+        "The app requests access to the microphone to record voice diary entries.",
+        "When the user chooses to create a voice diary entry, the audio recording may be sent to third-party services for transcription and AI-assisted processing, but only after the user provides explicit consent.",
+        "The resulting diary entry text is stored locally on the user's device. We do not store user recordings or diary entries on our own servers."
+      ]
     },
     {
       heading: "2. Third-Party Services",
       content: [
-        "Transcription: Voice recordings are sent to Deepgram (deepgram.com) for transcription. This occurs only after the user provides explicit consent in the app. Audio is not retained by Deepgram beyond the duration of processing. See Deepgram's privacy policy: deepgram.com/privacy",
-        "AI text improvement: If the user chooses to improve recognized text using AI, that text is sent to Groq AI (groq.com). This happens only upon explicit user action and is entirely optional. See Groq's privacy policy: groq.com/privacy",
-        "We do not sell or share user data with any third parties for any other purpose."
+        "Transcription and AI Processing: When the user chooses to create a voice diary entry, the audio recording is sent to Deepgram (deepgram.com), a third-party speech-to-text provider, to transcribe the recording into text. After transcription, the resulting text may be sent to Groq AI (groq.com) to generate a title and improve the readability of the diary entry.",
+        "This processing occurs only after the user provides explicit consent within the app. Audio recordings and transcribed text are used solely to provide transcription, title generation, and AI-assisted text improvement features.",
+        "Audio recordings and transcribed text are not sold, shared, or used for advertising purposes. See Deepgram's privacy policy: deepgram.com/privacy. See Groq's privacy policy: groq.com/privacy.",
+        "We do not sell user data or share personal information with third parties except as described above and only for providing the app's transcription and AI-assisted features."
       ]
     },
     {
