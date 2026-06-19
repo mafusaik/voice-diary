@@ -50,6 +50,7 @@ export default function App() {
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const googlePlayUrl = "https://play.google.com/store/apps/details?id=com.glazer.audio.journal.voice.diary";
+  const iosAppStoreUrl = "https://apps.apple.com/us/app/voice-diary-ai-journal/id6774904082";
   const supportEmail = "glazer.dev@gmail.com";
 
   // Check URL routes for query params or hashes to serve Support instantly via URL request
@@ -487,18 +488,24 @@ export default function App() {
                     </a>
 
                     {/* iOS App Store static announcement with toast click helper */}
-                    <button
-                      onClick={() => showToast("iOS release is scheduled for Q4! Sign up via support email to join beta! 🍏")}
-                      className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/30 text-slate-800 dark:text-white shadow-xs hover:scale-101 transition-all cursor-pointer"
-                    >
-                      <svg className="w-6.5 h-6.5 fill-current" viewBox="0 0 24 24">
-                        <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z" />
-                      </svg>
-                      <div className="text-left">
-                        <span className="block text-[8px] uppercase tracking-wider font-extrabold opacity-70">Compatible version</span>
-                        <span className="block text-sm font-black">{t.comingSoonAppStore}</span>
-                      </div>
-                    </button>
+                   <a
+  href={iosAppStoreUrl}
+  target="_blank"
+  rel="noreferrer"
+  className="flex items-center gap-3 px-5 py-3 rounded-2xl bg-white/40 dark:bg-slate-800/40 border border-slate-200/50 dark:border-slate-700/30 text-slate-800 dark:text-white shadow-xs hover:scale-101 transition-all"
+>
+  <svg className="w-6.5 h-6.5 fill-current" viewBox="0 0 24 24">
+    <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z" />
+  </svg>
+  <div className="text-left">
+    <span className="block text-[8px] uppercase tracking-wider font-extrabold opacity-70">
+      Download for free
+    </span>
+    <span className="block text-sm font-black">
+      {t.getOnAppStore}
+    </span>
+  </div>
+</a>
 
                   </div>
 
